@@ -1,61 +1,165 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
-
 <p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
+  <a href="#"><img src="https://img.shields.io/badge/build-passing-brightgreen.svg" alt="Build Status"></a>
+  <a href="#"><img src="https://img.shields.io/badge/version-1.0.0-blue.svg" alt="Version"></a>
+  <a href="#"><img src="https://img.shields.io/badge/license-MIT-lightgrey.svg" alt="License"></a>
 </p>
 
-## About Laravel
+## About ENSAJ Events
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+**ENSAJ Events** est une plateforme web de gestion et de participation aux événements académiques organisés par l'École Nationale des Sciences Appliquées d'El Jadida. Elle permet aux étudiants de visualiser et de participer aux événements, aux administrateurs de créer des événements, et de gérer les listes des participants.
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+### Fonctionnalités principales
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+* Création et affichage d'événements (nom, description, date, image, lieu)
+* Tableau de bord administrateur : liste des événements et des participants
+* Tableau de bord participant : gestion de l'inscription aux événements
+* Système d'authentification sécurisé (login, logout)
 
-## Learning Laravel
+## Technologies utilisées
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+* **Frontend :**
+- ReactJS
+- React Router pour la navigation
+- Axios pour les requêtes API
+- Bootstrap ou Material UI pour les composants d'interface
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+* **Backend :**
+- Laravel (API RESTful)
+- Authentification JWT
+- MySQL pour la base de données
+- Eloquent ORM
+  
+* **Base de données :** MySQL
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+## Installation
 
-## Laravel Sponsors
+### 🧱 Prérequis
+- PHP ≥ 8.1
+- Composer
+- Node.js ≥ 16
+- npm
+- MySQL ou MariaDB
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+### Backend (Laravel)
 
-### Premium Partners
+```bash
+cd ensaj-events-backend
+composer install
+cp .env.example .env
+php artisan key:generate
+php artisan migrate
+php artisan serve
+```
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Redberry](https://redberry.international/laravel-development/)**
-- **[Active Logic](https://activelogic.com)**
+### Frontend (React)
 
-## Contributing
+```bash
+cd ensaj-events-frontend
+npm install
+npm run dev
+```
+### 1. Cloner le projet
+bash
+git clone https://github.com/N09-2024/ensaj-events.git
+cd ensaj-events
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+# Installation des dépendances
+composer install
 
-## Code of Conduct
+# Configuration de l'environnement
+cp .env.example .env
+php artisan key:generate
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+# Configuration de la base de données dans le fichier .env
+# Modifier les valeurs selon votre configuration
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=events
+DB_USERNAME=root
+DB_PASSWORD=
 
-## Security Vulnerabilities
+# Migration de la base de données
+php artisan migrate
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+# (Optionnel) Remplir la base de données avec des données de test
+php artisan db:seed
+
+# Lancer le serveur
+php artisan serve
+
+bash
+cd ensaj-events/ensaj-events-frontend
+
+# Installation des dépendances
+npm install
+
+# Configuration de l'URL de l'API dans le fichier .env
+# Créer un fichier .env s'il n'existe pas
+echo "REACT_APP_API_URL=http://localhost:8000/api" > .env
+
+# Lancer l'application
+npm start
+
+## 💾 Structure de la Base de Données
+
+La base de données comprend les tables principales suivantes :
+- users - Informations sur les utilisateurs et administrateurs
+- events - ensemble des événements disponibles
+
+## 🔑 Accès à l'Application
+
+### Accès Administrateur
+- Email: admin@ensaj.com
+- Mot de passe: password123
+
+### Accès Utilisateur
+- Email: participant@ensaj.com
+- Mot de passe: password123
+
+
+## 📞 Contact
+
+Pour toute question ou assistance, veuillez contacter [erraji.nour12@gmail.com] ou [elouajidisafae@gmail.com] ou [nouhaelbahloul366@gmail.com]
+
+## Screenshots
+
+<p align="center">
+  <img src="screenshots/dashboardParticipant.png" width="600" alt="Dashboard Screenshot">
+</p>
+<p align="center">
+  <img src="screenshots/dashboardAdmin.png" width="600" alt="Dashboard Screenshot">
+</p>
+<p align="center">
+  <img src="screenshots/login.png" width="600" alt="Dashboard Screenshot">
+</p>
+
+## 👩‍💻 Équipe du projet
+
+<p align="center">
+  <b>Projet réalisé par les étudiantes de l’ENSAJ</b><br>
+  <i>Dans le cadre du module Développement Web</i>
+</p>
+
+<ul>
+  <li><b>Étudiante 1 :</b> Er-raji Nour - [@errajinour12] (https://github.com/errajinour12) </li>
+  <li><b>Étudiante 2 :</b> El Ouajidi Safae - [@elouajidisafae] (https://github.com/elouajidisafae) </li>
+  <li><b>Étudiante 3 :</b> El Bahloul Nouha - [@N09-2024] (https://github.com/N09-2024) </li>
+</ul>
+
+<p align="center">
+  🎓 <b>École Nationale des Sciences Appliquées d'El Jadida</b><br>
+  📅 <b>Année universitaire :</b> 2024-2025
+</p>
+
+## Contribuer
+
+Les contributions sont les bienvenues ! Veuillez ouvrir une *issue* ou proposer une *pull request* pour toute suggestion ou amélioration.
 
 ## License
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+Ce projet est open-source sous licence [MIT](https://opensource.org/licenses/MIT).
+
+---
+
+> Projet réalisé dans le cadre d'un projet universitaire à l'[ENSAJ](https://ensaj.ucd.ac.ma) - Université Chouaib Doukkali.
