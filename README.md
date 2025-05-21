@@ -152,7 +152,7 @@ Pour toute question ou assistance, veuillez contacter [erraji.nour12@gmail.com] 
 ### ✅ Tableau de bord Participant
 
 <p align="center">
-  <img src="screenshots/dashboardParticipant.png" alt="Login" width="600">
+  <img src="screenshots/dashboardParticipant.png" alt="dashboardParticipant" width="600">
 </p>
 <p align="center"><i>Figure 2 : Tableau de bord Participant</i></p>
 
@@ -160,7 +160,7 @@ Pour toute question ou assistance, veuillez contacter [erraji.nour12@gmail.com] 
 ### ✅ Tableau de bord Administrateur
 
 <p align="center">
-  <img src="screenshots/dashboardAdmin.png" alt="Login" width="600">
+  <img src="screenshots/dashboardAdmin.png" alt="dashboardAdmin" width="600">
 </p>
 <p align="center"><i>Figure 3 : Tableau de bord Administrateur</i></p>
 
