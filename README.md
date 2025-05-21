@@ -109,7 +109,7 @@ npm install
 
 # Configuration de l'URL de l'API dans le fichier .env
 * **Créer un fichier .env s'il n'existe pas**
-  ```bash
+```bash
 echo "REACT_APP_API_URL=http://localhost:8000/api" > .env
 ```
 
