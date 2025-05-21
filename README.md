@@ -58,7 +58,7 @@ cd ensaj-events-frontend
 npm install
 npm run dev
 ```
-# 1. Cloner le projet
+# Cloner le projet
 ```bash
 git clone https://github.com/N09-2024/ensaj-events.git
 cd ensaj-events
