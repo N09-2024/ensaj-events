@@ -1,0 +1,470 @@
+/* Animations - Pas besoin de les modifier */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes float {
+    0% { transform: translateY(0px); }
+    50% { transform: translateY(-10px); }
+    100% { transform: translateY(0px); }
+}
+
+@keyframes pulse {
+    0% { box-shadow: 0 0 0 0 rgba(124, 58, 237, 0.4); }
+    70% { box-shadow: 0 0 0 10px rgba(124, 58, 237, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(124, 58, 237, 0); }
+}
+
+@keyframes shimmer {
+    0% { background-position: -100% 0; }
+    100% { background-position: 100% 0; }
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* Root container */
+.admin-dashboard {
+    display: flex !important;
+    min-height: 100vh !important;
+    /* Dégradé de fond similaire à la page de connexion - plus vibrant */
+    background: linear-gradient(135deg, #e0e7ff 0%, #d5e0ff 100%) !important; /* Lighter background for the dashboard */
+    animation: fadeIn 0.8s ease-out !important;
+    overflow: hidden !important;
+    font-family: 'Inter', 'Roboto', sans-serif !important;
+}
+
+/* Sidebar */
+.sidebar {
+    width: 250px !important;
+    /* Dégradé de violet principal de la page de connexion */
+    background: linear-gradient(135deg, #6d28d9, #8b5cf6) !important;
+    color: #ffffff !important;
+    padding: 2rem 1rem !important;
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 1.5rem !important;
+    animation: fadeIn 0.8s ease-out !important;
+    transition: width 0.3s ease, transform 0.3s ease !important;
+    position: relative !important;
+    overflow: hidden !important;
+    /* Ombre plus prononcée pour correspondre à la page de connexion */
+    box-shadow: 8px 0 20px rgba(76, 29, 149, 0.4) !important; /* Increased shadow intensity */
+    z-index: 100 !important; /* Very high z-index to ensure visibility */
+}
+
+/* Assure la visibilité de la barre latérale même sur mobile si elle est ouverte */
+.sidebar.open {
+    width: 250px !important;
+    padding: 2rem 1rem !important;
+    transform: translateX(0) !important;
+}
+
+.sidebar::before {
+    content: '' !important;
+    position: absolute !important;
+    top: -50% !important;
+    left: -50% !important;
+    width: 200% !important;
+    height: 200% !important;
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.15) 0%, transparent 50%) !important; /* Slightly more visible radial gradient */
+    animation: float 15s infinite linear !important;
+    z-index: 1 !important;
+}
+
+.sidebar-header {
+    text-align: center !important;
+    padding-bottom: 1.5rem !important;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.3) !important; /* Plus visible */
+    position: relative !important;
+    z-index: 2 !important;
+}
+
+.admin-name {
+    font-size: 1.7rem !important; /* Plus grand */
+    font-weight: 700 !important;
+    font-family: 'Inter', 'Roboto', sans-serif !important;
+    color: #ffffff !important; /* Blanc pur */
+    margin-bottom: 0.25rem !important;
+    text-shadow: 0 2px 5px rgba(0, 0, 0, 0.2) !important; /* Ombre plus nette */
+}
+
+.admin-role {
+    font-size: 1rem !important; /* Plus visible */
+    font-family: 'Inter', 'Roboto', sans-serif !important;
+    opacity: 1 !important; /* Complètement opaque */
+    color: #e0e0e0 !important;
+}
+
+/* Sidebar navigation */
+.sidebar-nav ul {
+    list-style: none !important;
+    padding: 0 !important;
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 0.75rem !important;
+    position: relative !important;
+    z-index: 2 !important;
+}
+
+.nav-link {
+    width: 100% !important;
+    padding: 0.875rem 1.25rem !important;
+    background: transparent !important;
+    border: none !important;
+    color: #ffffff !important;
+    font-size: 1rem !important; /* Plus visible */
+    font-weight: 500 !important;
+    font-family: 'Inter', 'Roboto', sans-serif !important;
+    text-align: left !important;
+    border-radius: 0.75rem !important;
+    cursor: pointer !important;
+    transition: all 0.3s ease !important;
+    position: relative !important;
+    overflow: hidden !important;
+    display: flex !important;
+    align-items: center !important;
+}
+
+.nav-link::before {
+    content: '' !important;
+    position: absolute !important;
+    top: -50% !important;
+    left: -50% !important;
+    width: 200% !important;
+    height: 200% !important;
+    background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(255, 255, 255, 0.25), /* Shimmer plus prononcé */
+        transparent
+    ) !important;
+    transform: rotate(45deg) !important;
+    transition: 0.5s !important;
+    background-position: -100% 0 !important;
+    background-repeat: no-repeat !important;
+    z-index: -1 !important;
+}
+
+.nav-link:hover {
+    background: rgba(255, 255, 255, 0.2) !important; /* Fond plus visible au survol */
+    transform: translateY(-3px) !important;
+    box-shadow: 0 8px 18px rgba(109, 40, 217, 0.6) !important; /* Ombre très intense au survol */
+}
+
+.nav-link:hover::before {
+    animation: shimmer 1.5s infinite !important;
+}
+
+.nav-link:active {
+    transform: translateY(0) !important;
+    box-shadow: 0 4px 10px rgba(109, 40, 217, 0.4) !important;
+    background: rgba(255, 255, 255, 0.15) !important;
+}
+
+/* Main content */
+.main-content {
+    flex: 1 !important;
+    padding: 2.5rem !important;
+    animation: fadeIn 0.8s ease-out !important;
+    position: relative !important;
+    overflow: hidden !important;
+}
+
+.main-content::before {
+    content: '' !important;
+    position: absolute !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+    /* Motif SVG identique à la page de connexion */
+    background: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 60c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z' fill='%23ffffff' fill-opacity='0.15' fill-rule='evenodd'/%3E%3C/svg%3E") !important; /* Pattern plus visible */
+    opacity: 0.1 !important;
+    z-index: 1 !important;
+}
+
+/* Content header */
+.content-header {
+    display: flex !important;
+    justify-content: space-between !important;
+    align-items: center !important;
+    margin-bottom: 2.5rem !important;
+    position: relative !important;
+    z-index: 2 !important;
+}
+
+.dashboard-title {
+    font-size: 2.8rem !important; /* Encore plus grand */
+    font-weight: 800 !important;
+    color: #4c1d95 !important; /* Couleur des titres de la page de connexion */
+    font-family: 'Inter', 'Roboto', sans-serif !important;
+    margin-bottom: 0.5rem !important;
+    position: relative !important;
+    display: inline-block !important;
+    text-shadow: 0 4px 10px rgba(0, 0, 0, 0.3) !important; /* Ombre plus forte */
+}
+
+.dashboard-title::after {
+    content: '' !important;
+    position: absolute !important;
+    bottom: -10px !important;
+    left: 50% !important;
+    width: 0 !important;
+    height: 4px !important;
+    background: linear-gradient(90deg, #6d28d9, #8b5cf6) !important;
+    transform: translateX(-50%) !important;
+    transition: width 0.5s ease !important;
+    border-radius: 4px !important;
+}
+
+.content-header:hover .dashboard-title::after {
+    width: 90% !important;
+}
+
+.logout-button {
+    background: #ef4444 !important;
+    color: #ffffff !important;
+    padding: 1rem 1.75rem !important;
+    border: none !important;
+    border-radius: 0.75rem !important;
+    font-size: 1rem !important;
+    font-weight: 600 !important;
+    font-family: 'Inter', 'Roboto', sans-serif !important;
+    cursor: pointer !important;
+    transition: all 0.3s ease !important;
+    box-shadow: 0 6px 12px rgba(239, 68, 68, 0.4) !important;
+    position: relative !important;
+    overflow: hidden !important;
+}
+
+.logout-button::before {
+    content: '' !important;
+    position: absolute !important;
+    top: -50% !important;
+    left: -50% !important;
+    width: 200% !important;
+    height: 200% !important;
+    background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(255, 255, 255, 0.25), /* Shimmer plus prononcé */
+        transparent
+    ) !important;
+    transform: rotate(45deg) !important;
+    transition: 0.5s !important;
+    background-position: -100% 0 !important;
+    background-repeat: no-repeat !important;
+    z-index: -1 !important;
+}
+
+.logout-button:hover {
+    background: #dc2626 !important;
+    transform: translateY(-3px) !important;
+    box-shadow: 0 12px 25px rgba(239, 68, 68, 0.5) !important;
+}
+
+.logout-button:hover::before {
+    animation: shimmer 1.5s infinite !important;
+}
+
+.logout-button:active {
+    transform: translateY(0) !important;
+    box-shadow: 0 6px 15px rgba(239, 68, 68, 0.3) !important;
+}
+
+/* Content body */
+.content-body {
+    background: #ffffff !important;
+    padding: 2.5rem !important;
+    border-radius: 1.5rem !important;
+    box-shadow: 0 30px 60px rgba(76, 29, 149, 0.25) !important; /* Ombre très prononcée */
+    position: relative !important;
+    z-index: 2 !important;
+}
+
+.content-body p {
+    font-size: 1.15rem !important;
+    color: #4b5563 !important;
+    font-family: 'Inter', 'Roboto', sans-serif !important;
+    text-align: center !important;
+    margin-bottom: 2rem !important;
+    opacity: 0.9 !important;
+}
+
+/* Stats grid */
+.stats-grid {
+    display: grid !important;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)) !important;
+    gap: 1.75rem !important;
+    margin-top: 2.5rem !important;
+    position: relative !important;
+    z-index: 2 !important;
+}
+
+.stat-card {
+    /* Dégradé bleu foncé distinct pour les cartes de stats */
+    background: linear-gradient(135deg, #1e3a8a, #2b6cb0) !important;
+    padding: 2.25rem !important;
+    border-radius: 1rem !important;
+    text-align: center !important;
+    box-shadow: 0 15px 30px rgba(30, 58, 138, 0.35) !important; /* Ombre plus forte */
+    transition: all 0.3s ease !important;
+    position: relative !important;
+    overflow: hidden !important;
+    color: #ffffff !important;
+    display: flex !important; /* S'assurer que le contenu est bien agencé */
+    flex-direction: column !important;
+    justify-content: center !important;
+    align-items: center !important;
+}
+
+.stat-card::before {
+    content: '' !important;
+    position: absolute !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+    /* Motif SVG identique à la page de connexion */
+    background: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 60c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z' fill='%23ffffff' fill-opacity='0.15' fill-rule='evenodd'/%3E%3C/svg%3E") !important;
+    opacity: 0.1 !important;
+    z-index: -1 !important;
+}
+
+.stat-card:hover {
+    transform: translateY(-7px) !important;
+    box-shadow: 0 20px 40px rgba(30, 58, 138, 0.5) !important;
+}
+
+.stat-value {
+    font-size: 3rem !important;
+    font-weight: 800 !important;
+    color: #ffffff !important;
+    margin-bottom: 0.75rem !important;
+    text-shadow: 0 3px 12px rgba(0, 0, 0, 0.4) !important;
+}
+
+.stat-label {
+    font-size: 1.1rem !important;
+    color: #ffffff !important;
+    font-family: 'Inter', 'Roboto', sans-serif !important;
+    opacity: 1 !important; /* Complètement opaque */
+    text-transform: uppercase !important;
+    letter-spacing: 0.08em !important;
+}
+
+/* Error message */
+.error-message {
+    background-color: #fef2f2 !important;
+    color: #ef4444 !important;
+    padding: 0.75rem !important;
+    border: 1px solid #fee2e2 !important;
+    border-radius: 0.75rem !important;
+    margin-bottom: 1.5rem !important;
+    text-align: center !important;
+    font-size: 0.9rem !important;
+    animation: fadeIn 0.3s ease-out !important;
+    transform-origin: center !important;
+    box-shadow: 0 2px 8px rgba(239, 68, 68, 0.2) !important;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+    .sidebar {
+        width: 180px !important;
+        padding: 1.5rem 0.75rem !important;
+    }
+
+    .main-content {
+        padding: 1.5rem !important;
+    }
+
+    .dashboard-title {
+        font-size: 2rem !important;
+    }
+
+    .logout-button {
+        padding: 0.75rem 1.25rem !important;
+        font-size: 0.9rem !important;
+    }
+
+    .stat-card {
+        padding: 1.75rem !important;
+    }
+
+    .stat-value {
+        font-size: 2.2rem !important;
+    }
+
+    .stat-label {
+        font-size: 1rem !important;
+    }
+}
+
+@media (max-width: 576px) {
+    .admin-dashboard {
+        flex-direction: column !important;
+    }
+
+    .sidebar {
+        width: 100% !important;
+        padding: 1.5rem !important;
+        background: linear-gradient(90deg, #d0bcf1, #8b5cf6) !important;
+        box-shadow: 0 4px 15px rgba(76, 29, 149, 0.2) !important;
+        transform: translateX(-100%) !important;
+        position: fixed !important;
+        height: 100vh !important;
+        left: 0 !important;
+        top: 0 !important;
+        z-index: 1000 !important;
+    }
+
+    .sidebar.open {
+        width: 250px !important;
+        padding: 2rem 1rem !important;
+        transform: translateX(0) !important;
+    }
+
+    .sidebar-header {
+        padding-bottom: 1rem !important;
+    }
+
+    .nav-link {
+        padding: 0.75rem 0.5rem !important;
+        font-size: 0.875rem !important;
+    }
+
+    .main-content {
+        padding: 1rem !important;
+        margin-top: 50px !important;
+    }
+
+    .stats-grid {
+        grid-template-columns: 1fr !important;
+    }
+
+    .dashboard-title {
+        font-size: 1.8rem !important;
+    }
+
+    .toggle-button {
+        display: block !important;
+        position: fixed !important;
+        top: 1rem !important;
+        left: 1rem !important;
+        z-index: 1001 !important;
+        background: linear-gradient(90deg, #6d28d9, #8b5cf6) !important;
+        color: #ffffff !important;
+        border: none !important;
+        padding: 0.6rem 1.1rem !important;
+        border-radius: 0.75rem !important;
+        cursor: pointer !important;
+        font-size: 0.9rem !important;
+        font-weight: 600 !important;
+        box-shadow: 0 4px 8px rgba(109, 40, 217, 0.3) !important;
+    }
+}
