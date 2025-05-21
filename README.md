@@ -139,17 +139,33 @@ La base de données comprend les tables principales suivantes :
 
 Pour toute question ou assistance, veuillez contacter [erraji.nour12@gmail.com] ou [elouajidisafae@gmail.com] ou [nouhaelbahloul366@gmail.com]
 
-## Screenshots
+## 📸 Captures d'écran
+
+### 🏠 Page de Connexion
 
 <p align="center">
-  <img src="screenshots/dashboardParticipant.png" width="600" alt="Dashboard Screenshot">
+  <img src="screenshots/login.png" alt="Login" width="600">
 </p>
+<p align="center"><i>Figure 1 : Page de connexion</i></p>
+
+---
+### ✅ Tableau de bord Participant
+
 <p align="center">
-  <img src="screenshots/dashboardAdmin.png" width="600" alt="Dashboard Screenshot">
+  <img src="screenshots/dashboardParticipant.png" alt="Login" width="600">
 </p>
+<p align="center"><i>Figure 1 : Tableau de bord Participant</i></p>
+
+---
+### ✅ Tableau de bord Administrateur
+
 <p align="center">
-  <img src="screenshots/login.png" width="600" alt="Dashboard Screenshot">
+  <img src="screenshots/dashboardAdmin.png" alt="Login" width="600">
 </p>
+<p align="center"><i>Figure 1 : Tableau de bord Administrateur</i></p>
+
+---
+
 
 ## 👩‍💻 Équipe du projet
 
