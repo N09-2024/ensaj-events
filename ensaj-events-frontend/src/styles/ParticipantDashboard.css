@@ -505,3 +505,57 @@
   background: #5b21b6;
   transform: translateY(-2px);
 }
+/* Indicateur d'événement dans le calendrier */
+.day.has-event {
+  background-color: #bfdbfe;
+  position: relative;
+}
+
+.day.has-event:hover {
+  background-color: #93c5fd;
+}
+
+.event-indicator {
+  position: absolute;
+  bottom: 2px;
+  right: 4px;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background-color: #3b82f6;
+  display: inline-block;
+}
+
+/* Boutons d'événement */
+.participate-button {
+  display: block;
+  width: 100%;
+  padding: 0.75rem;
+  background-color: #6b46c1;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  font-size: 1rem;
+  font-weight: bold;
+  margin-top: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.participate-button:hover {
+  background-color: #5b21b6;
+}
+
+.participated-button {
+  display: block;
+  width: 100%;
+  padding: 0.75rem;
+  background-color: #e2e8f0;
+  color: #64748b;
+  border: none;
+  border-radius: 5px;
+  font-size: 1rem;
+  font-weight: bold;
+  margin-top: 1rem;
+  cursor: not-allowed;
+}

@@ -89,7 +89,9 @@ export default function ParticipantDashboard() {
   // Handlers
   const handleLogout = async () => {
     try {
-      await api.post('/logout', {}, { headers: { Authorization: `Bearer ${localStorage.getItem('token')}` } });
+      await api.post('/logout', {}, {
+        headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
+      });
     } catch (error) {
       console.error('Error during logout:', error);
     } finally {
@@ -117,6 +119,7 @@ export default function ParticipantDashboard() {
   const getDaysInMonth = (month, year) => new Date(year, month + 1, 0).getDate();
   const getFirstDayOfMonth = (month, year) => (new Date(year, month, 1).getDay() + 6) % 7;
 
+  // ✨ Fonction mise à jour pour afficher tous les jours concernés par les événements
   const renderCalendarDays = () => {
     const days = [];
     const firstDayIndex = getFirstDayOfMonth(currentMonth, currentYear);
@@ -126,23 +129,63 @@ export default function ParticipantDashboard() {
       days.push(<div key={`empty-start-${i}`} className="day other-month"></div>);
     }
 
+    const eventDays = [];
+
+    events.forEach((event) => {
+      if (!event.start_date) return;
+
+      const startDate = new Date(event.start_date);
+      const endDate = event.end_date ? new Date(event.end_date) : new Date(event.start_date);
+
+      const startDay = startDate.getDate();
+      const endDay = endDate.getDate();
+      const startMonth = startDate.getMonth();
+      const endMonth = endDate.getMonth();
+      const startYear = startDate.getFullYear();
+      const endYear = endDate.getFullYear();
+
+      const isSameMonthStart =
+        startYear === currentYear && startMonth === currentMonth;
+
+      const isSameMonthEnd =
+        endYear === currentYear && endMonth === currentMonth;
+
+      let dayStart = 1;
+      let dayEnd = daysInMonth;
+
+      if (isSameMonthStart && isSameMonthEnd) {
+        dayStart = startDay;
+        dayEnd = endDay;
+      } else if (isSameMonthStart && !isSameMonthEnd) {
+        dayStart = startDay;
+        dayEnd = daysInMonth;
+      } else if (!isSameMonthStart && isSameMonthEnd) {
+        dayStart = 1;
+        dayEnd = endDay;
+      } else {
+        return; // hors du mois actuel
+      }
+
+      for (let d = dayStart; d <= dayEnd; d++) {
+        eventDays.push(d);
+      }
+    });
+
     for (let i = 1; i <= daysInMonth; i++) {
       const date = new Date(currentYear, currentMonth, i);
-      const today = new Date('2025-05-21');
+      const today = new Date('2025-05-21'); // Tu peux utiliser new Date() si nécessaire
       const isToday = date.toDateString() === today.toDateString();
-
-      const hasEvent = events.some((event) => {
-        if (!event || !event.start_date) return false;
-        const startDate = new Date(event.start_date);
-        const endDate = event.end_date ? new Date(event.end_date) : startDate;
-        return date >= startDate && date <= endDate;
-      });
 
       const classes = ['day'];
       if (isToday) classes.push('today');
-      if (hasEvent) classes.push('has-event');
+      if (eventDays.includes(i)) classes.push('has-event');
 
-      days.push(<div key={`day-${i}`} className={classes.join(' ')}>{i}</div>);
+      days.push(
+        <div key={`day-${i}`} className={classes.join(' ')}>
+          {i}
+          {eventDays.includes(i) && <span className="event-indicator">•</span>}
+        </div>
+      );
     }
 
     const remainingCells = 42 - days.length;
@@ -249,7 +292,7 @@ export default function ParticipantDashboard() {
 
         {/* Main Area */}
         <main className="dashboard-main">
-          <div className="content-grid"> 
+          <div className="content-grid">
             {/* Welcome Card */}
             <div className="welcome-card">
               <h2 className="welcome-title">Bienvenue, {participantName}!</h2>
@@ -279,70 +322,10 @@ export default function ParticipantDashboard() {
               </div>
             </div>
 
-            {/* Events Section */}
-            <div className="events-section">
-              <h2 className="section-title">Les Événements Actuels</h2>
-              <div className="events-list">
-                {loading ? (
-                  <div className="loading-container">
-                    <div className="loading-spinner"></div>
-                    <h3>Chargement des événements...</h3>
-                  </div>
-                ) : error ? (
-                  <div className="error-container">
-                    <span>⚠️</span>
-                    <h3>Erreur de chargement</h3>
-                    <p>{error}</p>
-                    <button onClick={() => fetchEventsRef.current && fetchEventsRef.current()}>
-                      🔄 Réessayer
-                    </button>
-                  </div>
-                ) : filteredEvents.length > 0 ? (
-                  <div className="event-cards-grid">
-                    {filteredEvents.slice(0, 2).map((event) => {
-                      const storedEvents = getParticipantEvents();
-                      const alreadyAdded = storedEvents.some(e => e.id === event.id);
+            {/* Liste des événements */}
+            <div className="events-section"> <h2 className="section-title">Les Événements Actuels</h2> <div className="events-list"> {loading ? ( <div className="loading-container"> <div className="loading-spinner"></div> <h3>Chargement des événements...</h3> </div> ) : error ? ( <div className="error-container"> <span>⚠️</span> <h3>Erreur de chargement</h3> <p>{error}</p> <button onClick={() => fetchEventsRef.current && fetchEventsRef.current()}> 🔄 Réessayer </button> </div> ) : filteredEvents.length > 0 ? ( <div className="event-cards-grid"> {filteredEvents.slice(0, 2).map((event) => { const storedEvents = getParticipantEvents(); const alreadyAdded = storedEvents.some(e => e.id === event.id); return ( <div key={event.id} className="event-card"> <img src={event.image ? `${backendUrl}/storage/${event.image}` : 'https://picsum.photos/id/10/200/120 '} alt={event.title || 'Événement'} className="event-image" /> <div className="event-details"> <h3 className="event-title">{event.title || 'Sans titre'}</h3> <p className="event-date"> {formatDate(event.start_date)} - {formatDate(event.end_date)} </p> <p className="event-location"> <span className="location-pin">📍</span> {event.location || 'ensaj'} </p> </div> </div> ); })} </div> ) : ( <div className="empty-container"> <span>😔</span> <h3>Aucun événement disponible</h3> <button onClick={() => navigate('/all-events')}> ➕ Découvrir des événements </button> </div> )} </div> <a href="/all-events" onClick={(e) => { e.preventDefault(); navigate('/all-events'); }} className="view-all" > Voir tout → </a> </div>
 
-                      return (
-                        <div key={event.id} className="event-card">
-                          <img
-                            src={event.image ? `${backendUrl}/storage/${event.image}` : 'https://picsum.photos/id/10/200/120 '}
-                            alt={event.title || 'Événement'}
-                            className="event-image"
-                          />
-                          <div className="event-details">
-                            <h3 className="event-title">{event.title || 'Sans titre'}</h3>
-                            <p className="event-date">
-                              {formatDate(event.start_date)} - {formatDate(event.end_date)}
-                            </p>
-                            <p className="event-location">
-                              <span className="location-pin">📍</span> {event.location || 'ensaj'}
-                            </p>
-                          </div>
-                        </div>
-                      );
-                    })}
-                  </div>
-                ) : (
-                  <div className="empty-container">
-                    <span>😔</span>
-                    <h3>Aucun événement disponible</h3>
-                    <button onClick={() => navigate('/all-events')}>
-                      ➕ Découvrir des événements
-                    </button>
-                  </div>
-                )}
-              </div>
-              <a
-                href="/all-events"
-                onClick={(e) => { e.preventDefault(); navigate('/all-events'); }}
-                className="view-all"
-              >
-                Voir tout →
-              </a>
-            </div>
-
-            {/* Calendar */}
+            {/* Calendrier */}
             <div className="calendar-card">
               <div className="calendar-header">
                 <h2 className="section-title">Calendrier</h2>
@@ -354,12 +337,14 @@ export default function ParticipantDashboard() {
               <p className="calendar-month">{getMonthName(currentMonth)}</p>
               <div className="calendar-grid">
                 {['Lun', 'Mar', 'Mer', 'Jeu', 'Ven', 'Sam', 'Dim'].map((day) => (
-                  <div key={day} className="day-name">{day}</div>
+                  <div key={day} className="day-name">
+                    {day}
+                  </div>
                 ))}
                 {renderCalendarDays()}
               </div>
             </div>
-          </div>
+            </div>
           </main>
         </div>
       </div>
