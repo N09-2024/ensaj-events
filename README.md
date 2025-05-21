@@ -33,14 +33,14 @@
 
 ## Installation
 
-### 🧱 Prérequis
+# 🧱 Prérequis
 - PHP ≥ 8.1
 - Composer
 - Node.js ≥ 16
 - npm
 - MySQL ou MariaDB
 
-### Backend (Laravel)
+# Backend (Laravel)
 
 ```bash
 cd ensaj-events-backend
@@ -51,55 +51,72 @@ php artisan migrate
 php artisan serve
 ```
 
-### Frontend (React)
+# Frontend (React)
 
 ```bash
 cd ensaj-events-frontend
 npm install
 npm run dev
 ```
-### 1. Cloner le projet
-bash
+# 1. Cloner le projet
+```bash
 git clone https://github.com/N09-2024/ensaj-events.git
 cd ensaj-events
+```
 
 # Installation des dépendances
+```bash
 composer install
+```
 
 # Configuration de l'environnement
+```bash
 cp .env.example .env
 php artisan key:generate
+```
 
 # Configuration de la base de données dans le fichier .env
-# Modifier les valeurs selon votre configuration
+* **Modifier les valeurs selon votre configuration**
+```bash
 DB_CONNECTION=mysql
 DB_HOST=127.0.0.1
 DB_PORT=3306
 DB_DATABASE=events
 DB_USERNAME=root
 DB_PASSWORD=
+```
 
 # Migration de la base de données
+```bash
 php artisan migrate
+```
 
 # (Optionnel) Remplir la base de données avec des données de test
+```bash
 php artisan db:seed
+```
 
 # Lancer le serveur
+```bash
 php artisan serve
-
-bash
 cd ensaj-events/ensaj-events-frontend
+```
 
 # Installation des dépendances
+```bash
 npm install
+```
 
 # Configuration de l'URL de l'API dans le fichier .env
-# Créer un fichier .env s'il n'existe pas
+* **Créer un fichier .env s'il n'existe pas**
+  ```bash
 echo "REACT_APP_API_URL=http://localhost:8000/api" > .env
+```
 
 # Lancer l'application
+```bash
 npm start
+```
 
 ## 💾 Structure de la Base de Données
 
