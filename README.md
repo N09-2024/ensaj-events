@@ -154,7 +154,7 @@ Pour toute question ou assistance, veuillez contacter [erraji.nour12@gmail.com] 
 <p align="center">
   <img src="screenshots/dashboardParticipant.png" alt="Login" width="600">
 </p>
-<p align="center"><i>Figure 1 : Tableau de bord Participant</i></p>
+<p align="center"><i>Figure 2 : Tableau de bord Participant</i></p>
 
 ---
 ### ✅ Tableau de bord Administrateur
@@ -162,7 +162,7 @@ Pour toute question ou assistance, veuillez contacter [erraji.nour12@gmail.com] 
 <p align="center">
   <img src="screenshots/dashboardAdmin.png" alt="Login" width="600">
 </p>
-<p align="center"><i>Figure 1 : Tableau de bord Administrateur</i></p>
+<p align="center"><i>Figure 3 : Tableau de bord Administrateur</i></p>
 
 ---
 
